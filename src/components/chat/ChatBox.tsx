@@ -1,20 +1,10 @@
-interface Message {
-  sender: string;
-  msg: string;
-}
-
-interface ChatBoxProps {
-  grpName: string;
-  messages: Message[];
-}
-
+import { CircularName } from './CircularName';
+import type { ChatBoxProps } from '../../types/chat.type';
 export const ChatBox = ({ grpName, messages }: ChatBoxProps) => {
   return (
     <div className="w-3/4 h-screen flex flex-col ">
       <div className="flex border-b-1 border-gray-200 py-3 ">
-        <div className="ml-5 w-8 h-8 border rounded-full bg-red-100 text-center flex items-center justify-center font-bold mr-3 ">
-          JW
-        </div>
+        <CircularName dimension={8} grpName={grpName} chatBox={true} />
         <div className="text-lg font-semibold py-1 ">{grpName}</div>
       </div>
 
@@ -25,16 +15,14 @@ export const ChatBox = ({ grpName, messages }: ChatBoxProps) => {
             className={`flex ${message.sender === 'You' ? 'justify-end' : 'justify-start'}`}
           >
             <div
-              className={`p-2 m-1 max-w-xs ${
+              className={`p-2  max-w-xs ${
                 message.sender === 'You'
-                  ? 'bg-purple-700 text-white text-end'
-                  : 'bg-gray-100 text-black'
+                  ? 'bg-purple-700 text-white m-1 text-end'
+                  : 'bg-gray-100 text-black ml-5'
               } rounded-lg`}
             >
-              <div className="text-xs mb-1 text-red">
-                {message.sender === 'You' ? '' : message.sender}
-              </div>
-              <div>{message.msg}</div>
+              <div className="text-xs mb-1">{message.sender === 'You' ? '' : message.sender}</div>
+              <div className="">{message.msg}</div>
             </div>
           </div>
         ))}

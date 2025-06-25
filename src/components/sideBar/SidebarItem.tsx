@@ -4,12 +4,12 @@ const SidebarItem = ({ icon, label, onClick, isActive }: SidebarItemProps) => {
   return (
     <div
       onClick={onClick}
-      className={`flex flex-col items-center space-y-1 cursor-pointer ${
-        isActive ? 'text-blue-500' : 'text-white'
+      className={`flex flex-col items-center font-light cursor-pointer text-sm hover:bg-white w-full m-1 ${
+        isActive ? 'text-white' : 'text-black'
       }`}
     >
-      <div className="p-2 hover:bg-gray-700 rounded">{icon}</div>
-      <span className="text-xs">{label}</span>
+      <div className="p-2  rounded">{icon}</div>
+      <span className="text-[10px]">{label}</span>
     </div>
   );
 };

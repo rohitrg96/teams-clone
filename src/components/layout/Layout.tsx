@@ -1,10 +1,6 @@
 import Sidebar from './Sidebar';
 import Topbar from './Topbar';
-import type { ReactNode } from 'react';
-
-interface LayoutProps {
-  children: ReactNode;
-}
+import type { LayoutProps } from '../../types/chat.type';
 
 const Layout = ({ children }: LayoutProps) => {
   return (
