@@ -26,18 +26,21 @@ export const Chat: React.FC = () => {
           </div>
         </div>
 
-        {groupData.map((group) => {
-          const lastMsg = group.messages.length - 1;
-          return (
-            <ChatCard
-              grpName={group.grpName}
-              msg={group.messages[lastMsg].msg}
-              key={group.id}
-              onClickChatCard={setId}
-              chatId={group.id || 0}
-            />
-          );
-        })}
+        {/* Scrollable Chat List */}
+        <div className="flex-1 overflow-y-auto">
+          {groupData.map((group) => {
+            const lastMsg = group.messages.length - 1;
+            return (
+              <ChatCard
+                grpName={group.grpName}
+                msg={group.messages[lastMsg].msg}
+                key={group.id}
+                onClickChatCard={setId}
+                chatId={group.id || 0}
+              />
+            );
+          })}
+        </div>
       </div>
 
       {/* ChatBox always visible */}

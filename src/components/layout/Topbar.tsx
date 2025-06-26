@@ -4,7 +4,7 @@ const Topbar = ({ onToggleSidebar }: { onToggleSidebar: () => void }) => {
   return (
     <div
       className="h-12 w-full bg-gray-100 flex items-center px-4 shadow 
-     justify-between md:justiy-between sm:justify-center"
+     justify-between lg:justify-center"
     >
       {/* Toggle button only visible below lg */}
       <button className="lg:hidden p-1" onClick={onToggleSidebar}>

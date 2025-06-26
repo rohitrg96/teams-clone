@@ -97,4 +97,92 @@ export const groupData = [
       { sender: 'Emma', msg: 'Will do, thanks!' },
     ],
   },
+  {
+    id: 7,
+    grpName: 'Mobile Team',
+    messages: [
+      { sender: 'Liam', msg: 'Android build is failing.' },
+      { sender: 'You', msg: 'Checking CI logs now.' },
+      { sender: 'Liam', msg: 'Might be dependency issue.' },
+      { sender: 'You', msg: 'Found the issue, fixing it.' },
+      { sender: 'Liam', msg: 'Let me know once done.' },
+    ],
+  },
+  {
+    id: 8,
+    grpName: 'Marketing Group',
+    messages: [
+      { sender: 'Emma', msg: 'Campaign goes live tomorrow.' },
+      { sender: 'You', msg: 'All assets are ready.' },
+      { sender: 'Emma', msg: 'Great, the team is excited.' },
+      { sender: 'You', msg: 'Let me know if you need help during launch.' },
+      { sender: 'Emma', msg: 'Will do, thanks!' },
+    ],
+  },
+  {
+    id: 7,
+    grpName: 'Mobile Team',
+    messages: [
+      { sender: 'Liam', msg: 'Android build is failing.' },
+      { sender: 'You', msg: 'Checking CI logs now.' },
+      { sender: 'Liam', msg: 'Might be dependency issue.' },
+      { sender: 'You', msg: 'Found the issue, fixing it.' },
+      { sender: 'Liam', msg: 'Let me know once done.' },
+    ],
+  },
+  {
+    id: 8,
+    grpName: 'Marketing Group',
+    messages: [
+      { sender: 'Emma', msg: 'Campaign goes live tomorrow.' },
+      { sender: 'You', msg: 'All assets are ready.' },
+      { sender: 'Emma', msg: 'Great, the team is excited.' },
+      { sender: 'You', msg: 'Let me know if you need help during launch.' },
+      { sender: 'Emma', msg: 'Will do, thanks!' },
+    ],
+  },
+  {
+    id: 7,
+    grpName: 'Mobile Team',
+    messages: [
+      { sender: 'Liam', msg: 'Android build is failing.' },
+      { sender: 'You', msg: 'Checking CI logs now.' },
+      { sender: 'Liam', msg: 'Might be dependency issue.' },
+      { sender: 'You', msg: 'Found the issue, fixing it.' },
+      { sender: 'Liam', msg: 'Let me know once done.' },
+    ],
+  },
+  {
+    id: 8,
+    grpName: 'Marketing Group',
+    messages: [
+      { sender: 'Emma', msg: 'Campaign goes live tomorrow.' },
+      { sender: 'You', msg: 'All assets are ready.' },
+      { sender: 'Emma', msg: 'Great, the team is excited.' },
+      { sender: 'You', msg: 'Let me know if you need help during launch.' },
+      { sender: 'Emma', msg: 'Will do, thanks!' },
+    ],
+  },
+  {
+    id: 7,
+    grpName: 'Mobile Team',
+    messages: [
+      { sender: 'Liam', msg: 'Android build is failing.' },
+      { sender: 'You', msg: 'Checking CI logs now.' },
+      { sender: 'Liam', msg: 'Might be dependency issue.' },
+      { sender: 'You', msg: 'Found the issue, fixing it.' },
+      { sender: 'Liam', msg: 'Let me know once done.' },
+    ],
+  },
+  {
+    id: 8,
+    grpName: 'Marketing Group',
+    messages: [
+      { sender: 'Emma', msg: 'Campaign goes live tomorrow.' },
+      { sender: 'You', msg: 'All assets are ready.' },
+      { sender: 'Emma', msg: 'Great, the team is excited.' },
+      { sender: 'You', msg: 'Let me know if you need help during launch.' },
+      { sender: 'Emma', msg: 'Will do, thanks!' },
+    ],
+  },
 ];
