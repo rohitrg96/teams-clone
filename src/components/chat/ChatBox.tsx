@@ -3,12 +3,12 @@ import { ChatHeader } from './ChatHeader';
 
 export const ChatBox = ({ grpName, messages }: ChatBoxProps) => {
   return (
-    <div className="w-3/4 h-screen flex flex-col">
+    <div className="w-full md:w-1/2 md:p-3 lg:w-3/4 h-screen flex flex-col">
       {/* Chat Header */}
       <ChatHeader grpName={grpName} />
 
-      {/* Chat Messages - Scrollable Area */}
-      <div className="flex flex-col gap-2 overflow-y-auto flex-grow px-14 py-4">
+      {/* Chat Messages */}
+      <div className="flex flex-col gap-2 overflow-y-auto flex-grow sm:px-14 pr-2 py-4">
         {messages.map((message, index) => (
           <div
             key={index}
@@ -28,8 +28,8 @@ export const ChatBox = ({ grpName, messages }: ChatBoxProps) => {
         ))}
       </div>
 
-      {/* Chat Input - Fixed at Bottom */}
-      <div className="px-14 py-4 flex bg-red-200 items-center">
+      {/* Chat Input */}
+      <div className="px-4 sm:px-14 pb-15 pt-6 flex items-center">
         <input
           type="text"
           placeholder="Type a message"
