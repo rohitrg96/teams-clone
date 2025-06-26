@@ -1,6 +1,6 @@
 import type { ChatCardProps } from '../../types/chat.type';
 import { CircularName } from './CircularName';
-export const ChartCard = ({ grpName, msg, onClickChatCard, chatId }: ChatCardProps) => {
+export const ChatCard = ({ grpName, msg, onClickChatCard, chatId }: ChatCardProps) => {
   return (
     <div
       className="border-gray-500 p-2 m-1 h-15 flex hover:bg-white hover:shadow-xl cursor-pointer rounded-xl"

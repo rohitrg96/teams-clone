@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChartCard } from '../components/chat/ChatCard';
+import { ChatCard } from '../components/chat/ChatCard';
 import { groupData } from '../const/chat';
 import { ChatBox } from '../components/chat/ChatBox';
 import { Filter, Video, Plus } from 'lucide-react';
@@ -28,7 +28,7 @@ export const Chat: React.FC = () => {
             const lastMsg = group.messages.length - 1;
             return (
               <>
-                <ChartCard
+                <ChatCard
                   grpName={group.grpName}
                   msg={group.messages[lastMsg].msg}
                   key={group.id}
