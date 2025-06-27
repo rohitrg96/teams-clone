@@ -1,10 +1,6 @@
 import { MessageCircle, Users, Calendar, Bell, Video } from 'lucide-react';
 import SidebarItem from '../sideBar/SidebarItem';
-
-interface SidebarProps {
-  isMobile?: boolean;
-  onSelectPage: (page: string) => void; // Pass selected page back to Layout
-}
+import type { SidebarProps } from '../../types/sideBar.type';
 
 const Sidebar = ({ isMobile, onSelectPage }: SidebarProps) => {
   return (

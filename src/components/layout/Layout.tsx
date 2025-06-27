@@ -2,8 +2,7 @@ import { useState } from 'react';
 import Sidebar from './Sidebar';
 import Topbar from './Topbar';
 import { Chat } from '../../pages/Chat';
-import { Meet } from '../../pages/Meet.tsx'; // Assume you create this page
-// import type { LayoutProps } from '../../types/chat.type';
+import { Meet } from '../../pages/Meet.tsx'; //
 
 const Layout = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
