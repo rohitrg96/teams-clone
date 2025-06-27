@@ -73,7 +73,7 @@ export const Meet = () => {
               {/* Image Hidden on Small Screens */}
               <div className="hidden sm:flex w-full sm:w-1/2 justify-center items-center">
                 <img
-                  src="/src/assets/schmeet.webp"
+                  src="/images/schmeet.webp"
                   alt="No Meetings"
                   className="h-full w-full  max-h-50"
                 />

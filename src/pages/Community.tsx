@@ -44,7 +44,7 @@ export const Community = () => {
       {/* Right Section - Image */}
       <div className="w-full md:w-8/12 flex justify-center items-center">
         <img
-          src="/src/assets/community1.png"
+          src="/images/community1.png"
           alt="Community"
           className="max-w-full h-auto object-contain"
         />
