@@ -2,7 +2,8 @@ import { useState } from 'react';
 import Sidebar from './Sidebar';
 import Topbar from './Topbar';
 import { Chat } from '../../pages/Chat';
-import { Meet } from '../../pages/Meet.tsx'; //
+import { Meet } from '../../pages/Meet.tsx';
+import { Community } from '../../pages/Community';
 
 const Layout = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -14,6 +15,8 @@ const Layout = () => {
         return <Chat />;
       case 'Meet':
         return <Meet />;
+      case 'Community':
+        return <Community />;
       default:
         return <Chat />;
     }

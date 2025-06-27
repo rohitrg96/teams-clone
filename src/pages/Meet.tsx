@@ -7,7 +7,7 @@ export const Meet = () => {
       <div className=" w-3/4 md:w-full md:m-5 lg:w-3/4 m-auto lg:m-auto ">
         <div className="flex flex-col items-start px-4 sm:px-8 md:px-16 lg:px-4 ">
           {/* Meet Label */}
-          <h1 className="text-2xl font-bold mb-5">Meet</h1>
+          <h1 className="text-2xl font-semibold my-5">Meet</h1>
 
           {/* Action Cards - Consistent Grid */}
           <div className="flex justify-between gap-2 mb-8 w-full">
@@ -55,10 +55,12 @@ export const Meet = () => {
           {/* Scheduled Meetings Section */}
           <div className="w-full mb-20">
             <div className="flex justify-between">
-              <h2 className="text-lg font-semibold mb-3">Scheduled meetings</h2>
+              <h2 className="text-lg lg:text-lg font-semibold mb-3 ">Scheduled meetings</h2>
               <div className="flex items-center mt-3 sm:mt-0">
                 <CalendarDays size={20} className=" mr-2" />
-                <button className=" cursor-pointer text-sm">View in calendar</button>
+                <button className=" cursor-pointer text-sm hidden sm:block">
+                  View in calendar
+                </button>
               </div>
             </div>
 
