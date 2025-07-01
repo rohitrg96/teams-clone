@@ -1,25 +1,24 @@
 interface CalendarBodyProps {
   view: 'Day' | 'Work Week' | 'Week';
+  visibleDate: Date;
 }
 
-export const CalendarBody = ({ view }: CalendarBodyProps) => {
+export const CalendarBody = ({ view, visibleDate }: CalendarBodyProps) => {
   const hours = Array.from({ length: 24 }, (_, i) => `${i}:00`);
 
-  const today = new Date();
   const weekdaysFull = [
+    'Sunday',
     'Monday',
     'Tuesday',
     'Wednesday',
     'Thursday',
     'Friday',
     'Saturday',
-    'Sunday',
   ];
 
-  // Week View
   const getWeekDates = () => {
-    const start = new Date(today);
-    start.setDate(today.getDate() - today.getDay());
+    const start = new Date(visibleDate);
+    start.setDate(start.getDate() - start.getDay());
     return Array.from({ length: 7 }, (_, i) => {
       const date = new Date(start);
       date.setDate(start.getDate() + i);
@@ -27,10 +26,9 @@ export const CalendarBody = ({ view }: CalendarBodyProps) => {
     });
   };
 
-  // Work Week View
   const getWorkWeekDates = () => {
-    const start = new Date(today);
-    start.setDate(today.getDate() - today.getDay() + 1); // Monday start
+    const start = new Date(visibleDate);
+    start.setDate(start.getDate() - start.getDay() + 1);
     return Array.from({ length: 5 }, (_, i) => {
       const date = new Date(start);
       date.setDate(start.getDate() + i);
@@ -43,7 +41,7 @@ export const CalendarBody = ({ view }: CalendarBodyProps) => {
       return (
         <div className="flex flex-col w-full border-l border-gray-300">
           <div className="h-12 flex items-center justify-center font-medium border-b border-gray-300">
-            {weekdaysFull[today.getDay()]} {today.toLocaleDateString()}
+            {weekdaysFull[visibleDate.getDay()]} {visibleDate.toLocaleDateString()}
           </div>
           {hours.map((hr) => (
             <div key={hr} className="h-12 border-b border-gray-200 text-xs px-2 flex items-center">
@@ -74,7 +72,6 @@ export const CalendarBody = ({ view }: CalendarBodyProps) => {
 
   return (
     <div className="flex">
-      {/* Hour Labels */}
       <div className="w-16 border-r border-gray-300">
         <div className="h-12"></div>
         {hours.map((hr) => (
@@ -87,7 +84,6 @@ export const CalendarBody = ({ view }: CalendarBodyProps) => {
         ))}
       </div>
 
-      {/* Calendar Columns */}
       <div className="flex-1">{renderColumns()}</div>
     </div>
   );
