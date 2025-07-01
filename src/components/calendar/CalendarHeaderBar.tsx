@@ -17,13 +17,6 @@ export const CalendarHeaderBar = ({
   const [showCalendarDropdown, setShowCalendarDropdown] = useState(false);
   const [showViewDropdown, setShowViewDropdown] = useState(false);
 
-  const today = new Date();
-
-  const isToday = (date: Date) =>
-    date.getDate() === today.getDate() &&
-    date.getMonth() === today.getMonth() &&
-    date.getFullYear() === today.getFullYear();
-
   const changeVisibleDate = (offset: number) => {
     const newDate = new Date(visibleDate);
 
