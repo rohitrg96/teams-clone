@@ -4,6 +4,7 @@ import Topbar from './Topbar';
 import { Chat } from '../../pages/Chat';
 import { Meet } from '../../pages/Meet.tsx';
 import { Community } from '../../pages/Community';
+import { CalendarPage } from '../../pages/Calendar.tsx';
 
 const Layout = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -17,6 +18,8 @@ const Layout = () => {
         return <Meet />;
       case 'Community':
         return <Community />;
+      case 'Calendar':
+        return <CalendarPage />;
       default:
         return <Chat />;
     }
