@@ -16,7 +16,7 @@ export const CalendarTopBar = () => {
         {/* Join with ID Button */}
         <button className="flex items-center space-x-1 bg-white hover:bg-gray-100 px-3 py-2 rounded-lg text-sm font-medium cursor-pointer border border-gray-300">
           <Hash size={16} />
-          <span>Join with ID</span>
+          <span>Join with an ID</span>
         </button>
 
         {/* Meet Now Button */}
