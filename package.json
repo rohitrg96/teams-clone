@@ -12,6 +12,7 @@
     "format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,css,md}\""
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.4",
     "@tailwindcss/vite": "^4.1.10",
     "lucide-react": "^0.523.0",
     "react": "^19.1.0",
