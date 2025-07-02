@@ -69,8 +69,9 @@ export const CalendarBody = ({ view, visibleDate }: CalendarBodyProps) => {
           </div>
 
           {hours.map((hr) => (
-            <div key={hr} className="h-24 relative border-b border-gray-200 text-xs ">
-              <div className="absolute left-0 right-0 top-1/2 border-t border-dotted border-gray-300"></div>
+            <div key={hr}>
+              <div className="h-12 relative border-b border-gray-200 text-xs px-2 hover:bg-gray-100"></div>
+              <div className="h-12 relative border-b border-gray-200 text-xs px-2 hover:bg-gray-100"></div>
             </div>
           ))}
         </div>
@@ -93,8 +94,9 @@ export const CalendarBody = ({ view, visibleDate }: CalendarBodyProps) => {
             </div>
 
             {hours.map((hr) => (
-              <div key={hr} className="h-24 relative border-b border-gray-200 text-xs px-2">
-                <div className="absolute left-0 right-0 top-1/2 border-t border-dotted border-gray-300"></div>
+              <div key={hr}>
+                <div className="h-12 relative border-b border-gray-200 text-xs px-2 hover:bg-gray-100"></div>
+                <div className="h-12 relative border-b border-gray-200 text-xs px-2 hover:bg-gray-100"></div>
               </div>
             ))}
           </div>
