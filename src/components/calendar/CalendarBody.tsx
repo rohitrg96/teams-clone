@@ -1,9 +1,10 @@
 interface CalendarBodyProps {
   view: 'Day' | 'Work Week' | 'Week';
   visibleDate: Date;
+  onSlotClick?: (date: Date, hour: number, isSecondHalf: boolean) => void;
 }
 
-export const CalendarBody = ({ view, visibleDate }: CalendarBodyProps) => {
+export const CalendarBody = ({ view, visibleDate, onSlotClick }: CalendarBodyProps) => {
   const hours = Array.from({ length: 24 }, (_, i) => `${i}`);
 
   const weekdaysFull = [
@@ -52,12 +53,12 @@ export const CalendarBody = ({ view, visibleDate }: CalendarBodyProps) => {
   };
 
   const renderColumns = () => {
-    const formattedDate = (date: Date) => date.getDate().toString().padStart(2, '0'); // Converts to 2-digit format
+    const formattedDate = (date: Date) => date.getDate().toString().padStart(2, '0');
 
     if (view === 'Day') {
       return (
-        <div className="flex flex-col w-full border-l border-gray-300  justify-between">
-          <div className="h-12 flex flex-col items-start justify-center  py-8 px-2 border-b border-gray-300">
+        <div className="flex flex-col w-full border-l border-gray-300 justify-between">
+          <div className="h-12 flex flex-col items-start justify-center py-8 px-2 border-b border-gray-300">
             <span
               className={`text-2xl font-semibold ${isToday(visibleDate) ? 'text-purple-700' : ''}`}
             >
@@ -70,8 +71,14 @@ export const CalendarBody = ({ view, visibleDate }: CalendarBodyProps) => {
 
           {hours.map((hr) => (
             <div key={hr}>
-              <div className="h-12 relative border-b border-gray-200 text-xs px-2 hover:bg-gray-100"></div>
-              <div className="h-12 relative border-b border-gray-200 text-xs px-2 hover:bg-gray-100"></div>
+              <div
+                className="h-12 relative border-b border-gray-200 text-xs px-2 hover:bg-gray-100 cursor-pointer"
+                onClick={() => onSlotClick?.(visibleDate, Number(hr), false)}
+              ></div>
+              <div
+                className="h-12 relative border-b border-gray-200 text-xs px-2 hover:bg-gray-100 cursor-pointer"
+                onClick={() => onSlotClick?.(visibleDate, Number(hr), true)}
+              ></div>
             </div>
           ))}
         </div>
@@ -83,8 +90,8 @@ export const CalendarBody = ({ view, visibleDate }: CalendarBodyProps) => {
     return (
       <div className="flex w-full">
         {dates.map((date) => (
-          <div key={date.toDateString()} className="flex-1 border-l   border-gray-300">
-            <div className="h-12 flex flex-col items-start justify-center px-2 py-8  border-b border-gray-300">
+          <div key={date.toDateString()} className="flex-1 border-l border-gray-300">
+            <div className="h-12 flex flex-col items-start justify-center px-2 py-8 border-b border-gray-300">
               <span className={`text-2xl font-semibold ${isToday(date) ? 'text-purple-700' : ''}`}>
                 {formattedDate(date)}
               </span>
@@ -95,8 +102,14 @@ export const CalendarBody = ({ view, visibleDate }: CalendarBodyProps) => {
 
             {hours.map((hr) => (
               <div key={hr}>
-                <div className="h-12 relative border-b border-gray-200 text-xs px-2 hover:bg-gray-100"></div>
-                <div className="h-12 relative border-b border-gray-200 text-xs px-2 hover:bg-gray-100"></div>
+                <div
+                  className="h-12 relative border-b border-gray-200 text-xs px-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={() => onSlotClick?.(date, Number(hr), false)}
+                ></div>
+                <div
+                  className="h-12 relative border-b border-gray-200 text-xs px-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={() => onSlotClick?.(date, Number(hr), true)}
+                ></div>
               </div>
             ))}
           </div>

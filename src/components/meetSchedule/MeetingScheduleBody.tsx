@@ -10,15 +10,25 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import { Switch } from '@headlessui/react';
-import { RichTextArea } from './RichTextArea'; // Adjust path if needed
+import { RichTextArea } from './RichTextArea';
 
-export const MeetingScheduleBody = () => {
+interface MeetingScheduleBodyProps {
+  prefillDate?: string;
+  prefillStartTime?: string;
+  prefillEndTime?: string;
+}
+
+export const MeetingScheduleBody = ({
+  prefillDate,
+  prefillStartTime,
+  prefillEndTime,
+}: MeetingScheduleBodyProps) => {
   const [title, setTitle] = useState('');
   const [participant, setParticipant] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [startTime, setStartTime] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [endTime, setEndTime] = useState('');
+  const [startDate, setStartDate] = useState(prefillDate ?? '');
+  const [startTime, setStartTime] = useState(prefillStartTime ?? '');
+  const [endDate, setEndDate] = useState(prefillDate ?? '');
+  const [endTime, setEndTime] = useState(prefillEndTime ?? '');
   const [allDay, setAllDay] = useState(false);
   const [repeatOption, setRepeatOption] = useState('Does not repeat');
   const [showRepeatDropdown, setShowRepeatDropdown] = useState(false);
