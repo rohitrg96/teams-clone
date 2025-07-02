@@ -8,27 +8,27 @@ export const CalendarTopBar = () => {
         <div className="bg-purple-700 p-2 rounded-lg">
           <CalendarDays className="text-white" size={20} />
         </div>
-        <h2 className="text-xl font-semibold">Calendar</h2>
+        <h2 className="text-lg sm:text-xl font-semibold">Calendar</h2>
       </div>
 
-      {/* Right: Buttons */}
-      <div className="flex items-center space-x-4">
+      {/* Right: Buttons in a Row */}
+      <div className="flex items-center space-x-2 sm:space-x-4">
         {/* Join with ID Button */}
         <button className="flex items-center space-x-1 bg-white hover:bg-gray-100 px-3 py-2 rounded-lg text-sm font-medium cursor-pointer border border-gray-300">
           <Hash size={16} />
-          <span>Join with an ID</span>
+          <span className="hidden sm:inline">Join with an ID</span>
         </button>
 
         {/* Meet Now Button */}
         <button className="flex items-center space-x-1 bg-white hover:bg-gray-100 px-3 py-2 rounded-lg text-sm font-medium cursor-pointer border border-gray-300">
           <Video size={16} />
-          <span>Meet Now</span>
+          <span className="hidden sm:inline">Meet Now</span>
         </button>
 
         {/* New Meeting Button */}
         <button className="flex items-center space-x-1 bg-purple-700 cursor-pointer text-white px-3 py-2 rounded-lg text-sm font-medium hover:shadow-xl border border-gray-300">
           <Plus size={16} />
-          <span>New Meeting</span>
+          <span className="hidden sm:inline">New Meeting</span>
         </button>
       </div>
     </div>

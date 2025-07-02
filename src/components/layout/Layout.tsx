@@ -5,7 +5,6 @@ import { Chat } from '../../pages/Chat';
 import { Meet } from '../../pages/Meet.tsx';
 import { Community } from '../../pages/Community';
 import { CalendarPage } from '../../pages/Calendar.tsx';
-import { MeetingSchedulePage } from '../../pages/MeetingSchdule.tsx';
 
 const Layout = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -18,7 +17,7 @@ const Layout = () => {
       case 'Meet':
         return <Meet />;
       case 'Community':
-        return <MeetingSchedulePage />;
+        return <Community />;
       case 'Calendar':
         return <CalendarPage />;
       default:
