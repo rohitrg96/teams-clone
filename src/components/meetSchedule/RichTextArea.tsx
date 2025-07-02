@@ -129,7 +129,7 @@ export const RichTextArea = ({ value, onChange, placeholder }: RichTextAreaProps
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder || 'Add description'}
-        className={`w-full h-[200px] px-2 py-2 bg-gray-100 rounded-t-lg border-b-2 outline-none text-sm resize-none ${
+        className={`w-full h-[240px] px-2 py-2 bg-gray-100 rounded-t-lg border-b-2 outline-none text-sm resize-none ${
           value ? 'border-purple-700' : 'border-gray-300 focus:border-purple-700'
         }`}
         style={{
