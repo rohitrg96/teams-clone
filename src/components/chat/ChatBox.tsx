@@ -3,7 +3,7 @@ import { ChatHeader } from './ChatHeader';
 
 export const ChatBox = ({ grpName, messages }: ChatBoxProps) => {
   return (
-    <div className="w-full md:w-1/2 md:p-3 lg:w-3/4 h-screen flex flex-col shadow-2xl rounded-3xl">
+    <div className="w-full  h-screen flex flex-col shadow-2xl rounded-3xl">
       {/* Chat Header */}
       <ChatHeader grpName={grpName} />
 
