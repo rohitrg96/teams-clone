@@ -4,7 +4,7 @@ import { CircularName } from './CircularName';
 export const ChatCard = ({ grpName, msg, onClickChatCard, chatId }: ChatCardProps) => {
   return (
     <div
-      className="border-gray-500 p-2 m-1 h-15 flex md:w-full md:text-sm hover:bg-white hover:shadow-xl cursor-pointer rounded-xl"
+      className="border-gray-500  p-2 m-1 h-15 flex md:w-full md:text-sm hover:bg-white hover:shadow-xl cursor-pointer rounded-xl"
       onClick={() => onClickChatCard(chatId)}
     >
       <CircularName dimension={10} grpName={grpName} />

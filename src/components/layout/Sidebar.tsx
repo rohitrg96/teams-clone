@@ -5,10 +5,15 @@ import type { SidebarProps } from '../../types/sideBar.type';
 const Sidebar = ({ isMobile, onSelectPage }: SidebarProps) => {
   return (
     <div
-      className={`h-screen bg-gray-100 border-r border-gray-200 flex flex-col items-center py-2 space-y-6
-      ${isMobile ? 'fixed top-12 left-0 z-20 w-20' : 'hidden'}
-      lg:flex lg:static lg:w-20`}
+      className={`h-screen bg-gray-100 border-r border-gray-300 flex flex-col items-center py-2 space-y-6
+      ${isMobile ? 'fixed top-12 left-0 z-20 w-17' : 'hidden'}
+      lg:flex lg:static lg:w-17`}
     >
+      {/* Teams Icon at Top */}
+      <div className="m-1">
+        <img src="/images/logo.png" alt="Teams" className="w-12 h-12 object-contain" />
+      </div>
+
       <SidebarItem
         icon={<MessageCircle size={24} />}
         label="Chat"
