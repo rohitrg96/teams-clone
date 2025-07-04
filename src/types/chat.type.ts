@@ -5,6 +5,8 @@ export interface ChatCardProps {
   msg: string;
   onClickChatCard: (id: number) => void;
   chatId: number;
+  image?: string;
+  dateTime: Date;
 }
 
 export interface Message {
@@ -21,6 +23,7 @@ export interface CircularNameProps {
   dimension: number;
   grpName: string;
   chatBox?: boolean;
+  image?: string;
 }
 
 export interface LayoutProps {

@@ -6,11 +6,11 @@ import { Filter, Video, Plus } from 'lucide-react';
 
 export const Chat: React.FC = () => {
   const [id, setId] = useState(1);
-  const [chatListWidth, setChatListWidth] = useState(320);
+  const [chatListWidth, setChatListWidth] = useState(400);
   const containerRef = useRef<HTMLDivElement>(null);
   const isDraggingRef = useRef(false);
 
-  const MIN_WIDTH = 250;
+  const MIN_WIDTH = 280;
   const MAX_WIDTH_FACTOR = 0.5; // 50% of container width
 
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -74,14 +74,16 @@ export const Chat: React.FC = () => {
 
           <div className="overflow-y-auto h-[calc(100%-60px)]">
             {groupData.map((group) => {
-              const lastMsg = group.messages.length - 1;
+              const lastMsg = group.messages[group.messages.length - 1]?.msg || '';
               return (
                 <ChatCard
-                  grpName={group.grpName}
-                  msg={group.messages[lastMsg].msg}
                   key={group.id}
+                  grpName={group.grpName}
+                  msg={lastMsg}
+                  chatId={group.id}
+                  image={group.image} // pass image if available
+                  dateTime={group.dateTime} // pass dateTime for proper time/date logic
                   onClickChatCard={setId}
-                  chatId={group.id || 0}
                 />
               );
             })}
@@ -93,7 +95,7 @@ export const Chat: React.FC = () => {
             className="cursor-col-resize hidden md:block absolute top-0 right-0"
             style={{ width: '8px', height: '100%', background: 'transparent' }}
           >
-            <div className="w-full h-full hover:bg-purple-400"></div>
+            <div className="w-full h-full hover:bg-gray-400"></div>
           </div>
         </div>
       )}
@@ -104,9 +106,9 @@ export const Chat: React.FC = () => {
           className="cursor-col-resize absolute left-0 top-0 h-full flex items-center justify-center"
           onMouseDown={handleMouseDown}
         >
-          <div className="w-1 h-full bg-transparent hover:bg-purple-400 absolute left-0 top-0"></div>
+          <div className="w-1 h-full bg-transparent hover:bg-gray-400 absolute left-0 top-0"></div>
           <div
-            className="w-3 h-16 bg-purple-500 hover:bg-purple-700 flex items-center justify-center text-xs text-white absolute left-0"
+            className="w-3 h-16 bg-gray-500 hover:bg-gray-700 flex items-center justify-center text-xs text-white absolute left-0"
             style={{ top: '40%', transform: 'translateY(-50%)' }}
             title="Select or drag to expand"
           >
