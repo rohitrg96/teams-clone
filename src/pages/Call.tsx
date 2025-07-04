@@ -92,7 +92,7 @@ export const CallPage = ({ onSelectPage, id, isMeet, setIsMeet }: CallPageProps)
 
       <div className="flex flex-1 h-full w-full">
         {/* Main Video/Profile Area */}
-        <div className={`h-full ${showChat ? 'w-8/12' : 'w-full'} transition-all duration-300`}>
+        <div className={`h-full ${showChat ? 'w-9/12' : 'w-full'} transition-all duration-300`}>
           {videoEnabled ? (
             <video
               ref={videoRef}
@@ -115,21 +115,16 @@ export const CallPage = ({ onSelectPage, id, isMeet, setIsMeet }: CallPageProps)
 
         {/* Chat Panel */}
         {showChat && user && (
-          <>
-            <div className="w-4/12"></div>
-            <MeetingChat
-              messages={user.messages}
-              onClose={() => setShowChat(false)}
-              isMeet={isMeet}
-            />
-          </>
+          <MeetingChat
+            messages={user.messages}
+            onClose={() => setShowChat(false)}
+            isMeet={isMeet}
+          />
         )}
 
         {/* Participants Panel */}
         {showParticipants && (
-          <>
-            <ParticipantsPanel micEnabled={micEnabled} onClose={() => setShowParticipants(false)} />
-          </>
+          <ParticipantsPanel micEnabled={micEnabled} onClose={() => setShowParticipants(false)} />
         )}
       </div>
     </div>
