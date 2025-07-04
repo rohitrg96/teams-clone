@@ -2,16 +2,19 @@ import React, { useState, useRef, useEffect } from 'react';
 import { ChatCard } from '../components/chat/ChatCard';
 import { groupData } from '../const/chat';
 import { ChatBox } from '../components/chat/ChatBox';
-import { Filter, Video, Plus } from 'lucide-react';
+import { Filter, Video, Plus, ArrowLeft } from 'lucide-react';
+import type { ChatPageProps } from '../types/chat.type';
 
-export const Chat: React.FC = () => {
-  const [id, setId] = useState(1);
-  const [chatListWidth, setChatListWidth] = useState(320);
+export const Chat = ({ onSelectPage, id, setId, setIsMeet }: ChatPageProps) => {
+  const [chatListWidth, setChatListWidth] = useState(400);
+  const [showChatBoxMobile, setShowChatBoxMobile] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 768);
+
   const containerRef = useRef<HTMLDivElement>(null);
   const isDraggingRef = useRef(false);
 
-  const MIN_WIDTH = 250;
-  const MAX_WIDTH_FACTOR = 0.5; // 50% of container width
+  const MIN_WIDTH = 280;
+  const MAX_WIDTH_FACTOR = 0.5;
 
   const handleMouseDown = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -40,10 +43,21 @@ export const Chat: React.FC = () => {
     document.body.style.cursor = 'default';
   };
 
+  const handleChatSelect = (chatId: number) => {
+    setId(chatId);
+    setShowChatBoxMobile(true);
+  };
+
   useEffect(() => {
+    window.addEventListener('resize', () => {
+      setIsDesktop(window.innerWidth >= 768);
+    });
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseup', handleMouseUp);
     return () => {
+      window.removeEventListener('resize', () => {
+        setIsDesktop(window.innerWidth >= 768);
+      });
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
     };
@@ -51,19 +65,30 @@ export const Chat: React.FC = () => {
 
   return (
     <div ref={containerRef} className="flex h-screen w-full relative">
-      {/* Chat List */}
-      {chatListWidth > 0 && (
+      {/* Chat List - Full width on mobile, resizable sidebar on desktop */}
+      {(chatListWidth > 0 || !showChatBoxMobile) && (
         <div
-          className="h-full bg-gray-100 p-4 hidden md:block relative"
-          style={{ width: chatListWidth }}
+          className={`h-full bg-gray-100 ${
+            showChatBoxMobile ? 'hidden' : 'block'
+          } md:block relative w-full md:w-auto`}
+          style={{
+            width: isDesktop && chatListWidth > 0 ? chatListWidth : undefined,
+          }}
         >
-          <div className="flex justify-between mr-3">
-            <div className="ml-5 text-lg mb-5 font-bold p-2">Chat</div>
+          {/* Header */}
+          <div className="flex justify-between items-center px-4 h-16">
+            <div className="text-lg font-bold">Chat</div>
             <div>
               <button className="bg-white hover:shadow-xl p-2 m-1 rounded-lg">
                 <Filter size={20} />
               </button>
-              <button className="bg-white hover:shadow-xl p-2 m-1 rounded-lg">
+              <button
+                className="bg-white hover:shadow-xl p-2 m-1 rounded-lg"
+                onClick={() => {
+                  setIsMeet(true);
+                  onSelectPage('CallPage');
+                }}
+              >
                 <Video size={20} />
               </button>
               <button className="bg-white hover:shadow-xl p-2 m-1 rounded-lg">
@@ -72,52 +97,60 @@ export const Chat: React.FC = () => {
             </div>
           </div>
 
-          <div className="overflow-y-auto h-[calc(100%-60px)]">
+          {/* Chat List */}
+          <div className="overflow-y-auto h-[calc(100%-64px)] px-3 pb-10">
             {groupData.map((group) => {
-              const lastMsg = group.messages.length - 1;
+              const lastMsg = group.messages[group.messages.length - 1]?.msg || '';
               return (
                 <ChatCard
-                  grpName={group.grpName}
-                  msg={group.messages[lastMsg].msg}
                   key={group.id}
-                  onClickChatCard={setId}
-                  chatId={group.id || 0}
+                  grpName={group.grpName}
+                  msg={lastMsg}
+                  chatId={group.id}
+                  image={group.image}
+                  dateTime={group.dateTime}
+                  isActive={group.id === id}
+                  onClickChatCard={handleChatSelect}
                 />
               );
             })}
           </div>
 
-          {/* Full-height Drag Handle on Right */}
-          <div
-            onMouseDown={handleMouseDown}
-            className="cursor-col-resize hidden md:block absolute top-0 right-0"
-            style={{ width: '8px', height: '100%', background: 'transparent' }}
-          >
-            <div className="w-full h-full hover:bg-purple-400"></div>
-          </div>
+          {/* Drag Handler only for desktop */}
+          {isDesktop && (
+            <div
+              onMouseDown={handleMouseDown}
+              className="cursor-col-resize hidden md:block absolute top-0 right-0"
+              style={{ width: '8px', height: '100%', background: 'transparent' }}
+            >
+              <div className="w-full h-full hover:bg-gray-400"></div>
+            </div>
+          )}
         </div>
       )}
 
-      {/* Drag Button when Collapsed */}
-      {chatListWidth === 0 && (
-        <div
-          className="cursor-col-resize absolute left-0 top-0 h-full flex items-center justify-center"
-          onMouseDown={handleMouseDown}
-        >
-          <div className="w-1 h-full bg-transparent hover:bg-purple-400 absolute left-0 top-0"></div>
-          <div
-            className="w-3 h-16 bg-purple-500 hover:bg-purple-700 flex items-center justify-center text-xs text-white absolute left-0"
-            style={{ top: '40%', transform: 'translateY(-50%)' }}
-            title="Select or drag to expand"
-          >
-            &gt;
+      {/* ChatBox - Fullscreen on mobile, side-by-side on desktop */}
+      <div className={`flex-1 h-full ${showChatBoxMobile ? 'block' : 'hidden'} md:block`}>
+        <div className="h-full flex flex-col">
+          {/* Back Button for mobile only */}
+          <div className="md:hidden flex items-center p-2 border-b">
+            <button
+              className="p-2 hover:bg-gray-200 rounded"
+              onClick={() => setShowChatBoxMobile(false)}
+            >
+              <ArrowLeft size={20} />
+            </button>
+            <div className="ml-2 font-semibold">{groupData[id - 1]?.grpName}</div>
           </div>
-        </div>
-      )}
 
-      {/* ChatBox fills remaining space */}
-      <div className="flex-1 h-full">
-        <ChatBox grpName={groupData[id - 1].grpName} messages={groupData[id - 1].messages} />
+          {/* ChatBox */}
+          <ChatBox
+            onSelectPage={onSelectPage}
+            grpName={groupData[id - 1]?.grpName}
+            messages={groupData[id - 1]?.messages}
+            image={groupData[id - 1]?.image}
+          />
+        </div>
       </div>
     </div>
   );
