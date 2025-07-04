@@ -1,7 +1,8 @@
 import { useState, useRef } from 'react';
 import { CallTopBar } from '../components/call/CallTopBar';
+import type { ChangePageProps } from '../types/chat.type';
 
-export const CallPage = () => {
+export const CallPage = ({ onSelectPage }: ChangePageProps) => {
   const [videoEnabled, setVideoEnabled] = useState(false);
   const [micEnabled, setMicEnabled] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -51,12 +52,15 @@ export const CallPage = () => {
 
   return (
     <div className="flex flex-col h-[528px] rounded-2xl bg-gray-200 text-white shadow-2xl z-10 my-1">
-      <CallTopBar
-        onToggleVideo={handleToggleVideo}
-        onToggleMic={handleToggleMic}
-        videoEnabled={videoEnabled}
-        micEnabled={micEnabled}
-      />
+      <div>
+        <CallTopBar
+          onToggleVideo={handleToggleVideo}
+          onSelectPage={onSelectPage}
+          onToggleMic={handleToggleMic}
+          videoEnabled={videoEnabled}
+          micEnabled={micEnabled}
+        />
+      </div>
 
       <div className="flex-1 flex items-center justify-center relative">
         {videoEnabled ? (

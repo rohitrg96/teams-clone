@@ -5,6 +5,7 @@ import { Chat } from '../../pages/Chat';
 import { Meet } from '../../pages/Meet.tsx';
 import { Community } from '../../pages/Community';
 import { CalendarPage } from '../../pages/Calendar.tsx';
+import { CallPage } from '../../pages/Call.tsx';
 
 const Layout = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -13,15 +14,17 @@ const Layout = () => {
   const renderPage = () => {
     switch (activePage) {
       case 'Chat':
-        return <Chat />;
+        return <Chat onSelectPage={setActivePage} />;
       case 'Meet':
         return <Meet />;
       case 'Community':
         return <Community />;
+      case 'CallPage':
+        return <CallPage onSelectPage={setActivePage} />;
       case 'Calendar':
         return <CalendarPage />;
       default:
-        return <Chat />;
+        return <Chat onSelectPage={setActivePage} />;
     }
   };
 

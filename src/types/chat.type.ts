@@ -31,3 +31,7 @@ export interface CircularNameProps {
 export interface LayoutProps {
   children: ReactNode;
 }
+
+export interface ChangePageProps {
+  onSelectPage: (page: string) => void; // Pass selected page back to Layout
+}

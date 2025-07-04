@@ -3,8 +3,9 @@ import { ChatCard } from '../components/chat/ChatCard';
 import { groupData } from '../const/chat';
 import { ChatBox } from '../components/chat/ChatBox';
 import { Filter, Video, Plus } from 'lucide-react';
+import type { ChangePageProps } from '../types/chat.type';
 
-export const Chat: React.FC = () => {
+export const Chat = ({ onSelectPage }: ChangePageProps) => {
   const [id, setId] = useState(1);
   const [chatListWidth, setChatListWidth] = useState(400);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -63,7 +64,10 @@ export const Chat: React.FC = () => {
               <button className="bg-white hover:shadow-xl p-2 m-1 rounded-lg">
                 <Filter size={20} />
               </button>
-              <button className="bg-white hover:shadow-xl p-2 m-1 rounded-lg">
+              <button
+                className="bg-white hover:shadow-xl p-2 m-1 rounded-lg"
+                onClick={() => onSelectPage('CallPage')}
+              >
                 <Video size={20} />
               </button>
               <button className="bg-white hover:shadow-xl p-2 m-1 rounded-lg">
