@@ -1,13 +1,45 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { CallTopBar } from '../components/call/CallTopBar';
 import type { ChangePageProps } from '../types/chat.type';
+import { MeetingChat } from '../components/chat/MeetingChat';
+import { ParticipantsPanel } from '../components/chat/ParticipantsPanel';
+import { groupData } from '../const/chat';
 
-export const CallPage = ({ onSelectPage }: ChangePageProps) => {
+interface CallPageProps extends ChangePageProps {
+  id?: number;
+  isMeet: boolean;
+  setIsMeet: (isMeet: boolean) => void;
+}
+
+export const CallPage = ({ onSelectPage, id, isMeet, setIsMeet }: CallPageProps) => {
   const [videoEnabled, setVideoEnabled] = useState(false);
   const [micEnabled, setMicEnabled] = useState(false);
+  const [seconds, setSeconds] = useState(0);
+  const [showChat, setShowChat] = useState(false);
+  const [showParticipants, setShowParticipants] = useState(false);
+
   const videoRef = useRef<HTMLVideoElement>(null);
   const videoStreamRef = useRef<MediaStream | null>(null);
   const audioStreamRef = useRef<MediaStream | null>(null);
+
+  // Find user only if id is provided
+  const user = groupData.find((group) => group.id === id);
+
+  const userName = isMeet == true ? 'Invite people to join you' : user?.grpName;
+  const userImage = isMeet == true ? '/images/RohitProfile.jpg' : user?.image;
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds((prev) => prev + 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const formatTime = (totalSeconds: number) => {
+    const mins = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+    const secs = String(totalSeconds % 60).padStart(2, '0');
+    return `${mins}:${secs}`;
+  };
 
   const handleToggleVideo = async () => {
     if (!videoEnabled) {
@@ -23,12 +55,8 @@ export const CallPage = ({ onSelectPage }: ChangePageProps) => {
         console.log('Camera permission denied', err);
       }
     } else {
-      if (videoStreamRef.current) {
-        videoStreamRef.current.getTracks().forEach((track) => track.stop());
-      }
-      if (videoRef.current) {
-        videoRef.current.srcObject = null;
-      }
+      videoStreamRef.current?.getTracks().forEach((track) => track.stop());
+      if (videoRef.current) videoRef.current.srcObject = null;
       setVideoEnabled(false);
     }
   };
@@ -43,37 +71,65 @@ export const CallPage = ({ onSelectPage }: ChangePageProps) => {
         console.log('Microphone permission denied', err);
       }
     } else {
-      if (audioStreamRef.current) {
-        audioStreamRef.current.getTracks().forEach((track) => track.stop());
-      }
+      audioStreamRef.current?.getTracks().forEach((track) => track.stop());
       setMicEnabled(false);
     }
   };
 
   return (
     <div className="flex flex-col h-[528px] rounded-2xl bg-gray-200 text-white shadow-2xl z-10 my-1">
-      <div>
-        <CallTopBar
-          onToggleVideo={handleToggleVideo}
-          onSelectPage={onSelectPage}
-          onToggleMic={handleToggleMic}
-          videoEnabled={videoEnabled}
-          micEnabled={micEnabled}
-        />
-      </div>
+      <CallTopBar
+        setIsMeet={setIsMeet}
+        onToggleVideo={handleToggleVideo}
+        onSelectPage={onSelectPage}
+        onToggleMic={handleToggleMic}
+        videoEnabled={videoEnabled}
+        micEnabled={micEnabled}
+        timer={formatTime(seconds)}
+        onToggleChat={() => setShowChat((prev) => !prev)}
+        onToggleParticipants={() => setShowParticipants((prev) => !prev)}
+      />
 
-      <div className="flex-1 flex items-center justify-center relative">
-        {videoEnabled ? (
-          <video ref={videoRef} className="w-full h-full object-cover" autoPlay muted playsInline />
-        ) : (
-          <div className="flex flex-col items-center justify-center">
-            <img
-              src="/images/RohitProfile.jpg"
-              alt="Profile"
-              className="w-24 h-24 rounded-full mb-4 object-cover border-4 border-white"
+      <div className="flex flex-1 h-full w-full">
+        {/* Main Video/Profile Area */}
+        <div className={`h-full ${showChat ? 'w-8/12' : 'w-full'} transition-all duration-300`}>
+          {videoEnabled ? (
+            <video
+              ref={videoRef}
+              className="w-full h-full object-cover"
+              autoPlay
+              muted
+              playsInline
             />
-            <p className="text-black text-xl font-bold">Invite people to join you</p>
-          </div>
+          ) : (
+            <div className="flex flex-col h-full items-center justify-center">
+              <img
+                src={userImage}
+                alt="Profile"
+                className="w-24 h-24 rounded-full mb-4 object-cover border-4 border-white"
+              />
+              <p className="text-black text-xl font-bold">{userName}</p>
+            </div>
+          )}
+        </div>
+
+        {/* Chat Panel */}
+        {showChat && user && (
+          <>
+            <div className="w-4/12"></div>
+            <MeetingChat
+              messages={user.messages}
+              onClose={() => setShowChat(false)}
+              isMeet={isMeet}
+            />
+          </>
+        )}
+
+        {/* Participants Panel */}
+        {showParticipants && (
+          <>
+            <ParticipantsPanel micEnabled={micEnabled} onClose={() => setShowParticipants(false)} />
+          </>
         )}
       </div>
     </div>

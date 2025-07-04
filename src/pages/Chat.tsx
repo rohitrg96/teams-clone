@@ -3,10 +3,9 @@ import { ChatCard } from '../components/chat/ChatCard';
 import { groupData } from '../const/chat';
 import { ChatBox } from '../components/chat/ChatBox';
 import { Filter, Video, Plus } from 'lucide-react';
-import type { ChangePageProps } from '../types/chat.type';
+import type { ChatPageProps } from '../types/chat.type';
 
-export const Chat = ({ onSelectPage }: ChangePageProps) => {
-  const [id, setId] = useState(1);
+export const Chat = ({ onSelectPage, id, setId, setIsMeet }: ChatPageProps) => {
   const [chatListWidth, setChatListWidth] = useState(400);
   const containerRef = useRef<HTMLDivElement>(null);
   const isDraggingRef = useRef(false);
@@ -66,7 +65,10 @@ export const Chat = ({ onSelectPage }: ChangePageProps) => {
               </button>
               <button
                 className="bg-white hover:shadow-xl p-2 m-1 rounded-lg"
-                onClick={() => onSelectPage('CallPage')}
+                onClick={() => {
+                  setIsMeet(true);
+                  onSelectPage('CallPage');
+                }}
               >
                 <Video size={20} />
               </button>
@@ -125,6 +127,7 @@ export const Chat = ({ onSelectPage }: ChangePageProps) => {
       {/* ChatBox */}
       <div className="flex-1 h-full">
         <ChatBox
+          onSelectPage={onSelectPage}
           grpName={groupData[id - 1].grpName}
           messages={groupData[id - 1].messages}
           image={groupData[id - 1].image}

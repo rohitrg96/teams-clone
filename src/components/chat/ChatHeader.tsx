@@ -1,15 +1,15 @@
 import { Video, Phone, Search, MoreHorizontal, UserRoundPlus } from 'lucide-react';
 import { CircularName } from './CircularName';
 import { useState } from 'react';
+import type { ChatHeaderProps } from '../../types/chat.type';
 
-interface ChatHeaderProps {
-  grpName: string;
-  image?: string;
-  activeTab: string;
-  setActiveTab: (tab: string) => void;
-}
-
-export const ChatHeader = ({ grpName, image, activeTab, setActiveTab }: ChatHeaderProps) => {
+export const ChatHeader = ({
+  grpName,
+  image,
+  activeTab,
+  setActiveTab,
+  onSelectPage,
+}: ChatHeaderProps) => {
   const tabs = ['Chat', 'Files', 'Photos'];
   const [hoverTab, setHoverTab] = useState<string | null>(null);
 
@@ -52,10 +52,16 @@ export const ChatHeader = ({ grpName, image, activeTab, setActiveTab }: ChatHead
       </div>
 
       <div className="flex items-center space-x-2 sm:space-x-3">
-        <button className="p-1 sm:p-2 rounded-2xl hover:bg-gray-200">
+        <button
+          className="p-1 sm:p-2 rounded-2xl hover:bg-gray-200"
+          onClick={() => onSelectPage('CallPage')}
+        >
           <Video className="text-purple-700" fill="purple" size={18} />
         </button>
-        <button className="p-1 sm:p-2 rounded-2xl hover:bg-gray-200">
+        <button
+          className="p-1 sm:p-2 rounded-2xl hover:bg-gray-200"
+          onClick={() => onSelectPage('CallPage')}
+        >
           <Phone className="text-purple-700" fill="purple" size={16} />
         </button>
         <button className="hidden sm:block p-1 sm:p-2 rounded-2xl hover:bg-gray-200">
