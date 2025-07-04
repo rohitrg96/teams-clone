@@ -1,12 +1,17 @@
 import { Video, Phone, Search, MoreHorizontal, UserRoundPlus } from 'lucide-react';
 import { CircularName } from './CircularName';
 
-export const ChatHeader = ({ grpName }: { grpName: string }) => {
+interface ChatHeaderProps {
+  grpName: string;
+  image?: string;
+}
+
+export const ChatHeader = ({ grpName, image }: ChatHeaderProps) => {
   return (
     <div className="flex justify-between items-center border-b border-gray-200 py-2 px-2 sm:px-4">
       {/* Left Side */}
       <div className="flex items-center overflow-hidden">
-        <CircularName dimension={9} grpName={grpName} chatBox={true} />
+        <CircularName dimension={9} grpName={grpName} image={image} chatBox />
 
         <div className="text-base sm:text-lg font-semibold py-1 truncate max-w-[100px] sm:max-w-[200px] md:max-w-[300px]">
           {grpName}
@@ -23,7 +28,6 @@ export const ChatHeader = ({ grpName }: { grpName: string }) => {
           <Phone className="text-purple-700" fill="purple" size={16} />
         </button>
 
-        {/* Hide this button on very small screens */}
         <button className="hidden sm:block p-1 sm:p-2 rounded-2xl hover:bg-gray-200">
           <UserRoundPlus size={16} />
         </button>

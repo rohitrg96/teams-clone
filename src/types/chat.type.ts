@@ -7,6 +7,7 @@ export interface ChatCardProps {
   chatId: number;
   image?: string;
   dateTime: Date;
+  isActive: boolean;
 }
 
 export interface Message {
@@ -16,6 +17,7 @@ export interface Message {
 
 export interface ChatBoxProps {
   grpName: string;
+  image?: string;
   messages: Message[];
 }
 

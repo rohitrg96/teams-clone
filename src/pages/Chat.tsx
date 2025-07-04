@@ -11,7 +11,7 @@ export const Chat: React.FC = () => {
   const isDraggingRef = useRef(false);
 
   const MIN_WIDTH = 280;
-  const MAX_WIDTH_FACTOR = 0.5; // 50% of container width
+  const MAX_WIDTH_FACTOR = 0.5;
 
   const handleMouseDown = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -51,14 +51,14 @@ export const Chat: React.FC = () => {
 
   return (
     <div ref={containerRef} className="flex h-screen w-full relative">
-      {/* Chat List */}
       {chatListWidth > 0 && (
         <div
-          className="h-full bg-gray-100 p-4 hidden md:block relative"
+          className="h-full bg-gray-100 hidden md:block relative"
           style={{ width: chatListWidth }}
         >
-          <div className="flex justify-between mr-3">
-            <div className="ml-5 text-lg mb-5 font-bold p-2">Chat</div>
+          {/* Header */}
+          <div className="flex justify-between items-center px-4 h-16 ">
+            <div className="text-lg font-bold">Chat</div>
             <div>
               <button className="bg-white hover:shadow-xl p-2 m-1 rounded-lg">
                 <Filter size={20} />
@@ -72,7 +72,8 @@ export const Chat: React.FC = () => {
             </div>
           </div>
 
-          <div className="overflow-y-auto h-[calc(100%-60px)]">
+          {/* Chat List */}
+          <div className="overflow-y-auto h-[calc(100%-64px)] px-3 pb-10">
             {groupData.map((group) => {
               const lastMsg = group.messages[group.messages.length - 1]?.msg || '';
               return (
@@ -81,15 +82,15 @@ export const Chat: React.FC = () => {
                   grpName={group.grpName}
                   msg={lastMsg}
                   chatId={group.id}
-                  image={group.image} // pass image if available
-                  dateTime={group.dateTime} // pass dateTime for proper time/date logic
+                  image={group.image}
+                  dateTime={group.dateTime}
+                  isActive={group.id === id}
                   onClickChatCard={setId}
                 />
               );
             })}
           </div>
 
-          {/* Full-height Drag Handle on Right */}
           <div
             onMouseDown={handleMouseDown}
             className="cursor-col-resize hidden md:block absolute top-0 right-0"
@@ -100,7 +101,7 @@ export const Chat: React.FC = () => {
         </div>
       )}
 
-      {/* Drag Button when Collapsed */}
+      {/* Drag button when collapsed */}
       {chatListWidth === 0 && (
         <div
           className="cursor-col-resize absolute left-0 top-0 h-full flex items-center justify-center"
@@ -117,9 +118,13 @@ export const Chat: React.FC = () => {
         </div>
       )}
 
-      {/* ChatBox fills remaining space */}
+      {/* ChatBox */}
       <div className="flex-1 h-full">
-        <ChatBox grpName={groupData[id - 1].grpName} messages={groupData[id - 1].messages} />
+        <ChatBox
+          grpName={groupData[id - 1].grpName}
+          messages={groupData[id - 1].messages}
+          image={groupData[id - 1].image}
+        />
       </div>
     </div>
   );

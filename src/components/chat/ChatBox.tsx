@@ -1,13 +1,13 @@
 import type { ChatBoxProps } from '../../types/chat.type';
 import { ChatHeader } from './ChatHeader';
 
-export const ChatBox = ({ grpName, messages }: ChatBoxProps) => {
+export const ChatBox = ({ grpName, messages, image }: ChatBoxProps) => {
   return (
-    <div className="w-full  h-screen flex flex-col shadow-2xl rounded-3xl">
-      {/* Chat Header */}
-      <ChatHeader grpName={grpName} />
+    <div className="w-full h-screen flex flex-col shadow-2xl rounded-3xl">
+      {/* Chat Header with Image */}
+      <ChatHeader grpName={grpName} image={image} />
 
-      {/* Chat Messages */}
+      {/* Messages */}
       <div className="flex flex-col gap-2 overflow-y-auto flex-grow sm:px-14 pr-2 py-4">
         {messages.map((message, index) => (
           <div
@@ -28,7 +28,7 @@ export const ChatBox = ({ grpName, messages }: ChatBoxProps) => {
         ))}
       </div>
 
-      {/* Chat Input */}
+      {/* Input */}
       <div className="px-4 sm:px-14 pb-15 pt-6 flex items-center">
         <input
           type="text"

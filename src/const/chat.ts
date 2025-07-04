@@ -1,3 +1,5 @@
+import { Trash2, UserRoundPlus, MicOff, EyeOff, Link } from 'lucide-react';
+
 export const groupData = [
   {
     id: 1,
@@ -174,4 +176,12 @@ export const groupData = [
       { sender: 'You', msg: 'Ready for the meeting.' },
     ],
   },
+];
+
+export const dropdownOptions = [
+  { label: 'Add to Group', icon: UserRoundPlus, action: () => console.log('Add to Group clicked') },
+  { label: 'Mute', icon: MicOff, action: () => console.log('Mute clicked') },
+  { label: 'Hide', icon: EyeOff, action: () => console.log('Hide clicked') },
+  { label: 'Get Chat Link', icon: Link, action: () => console.log('Get Chat Link clicked') },
+  { label: 'Delete Chat', icon: Trash2, action: () => console.log('Delete Chat clicked') },
 ];
