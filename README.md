@@ -1,69 +1,87 @@
-# React + TypeScript + Vite
+# Microsoft Teams Clone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive and interactive Microsoft Teams Clone built with **React**, **Vite**, and **Tailwind CSS**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- Group Chat Interface with File & Photo Tabs
+- Responsive Meeting/Call Page with Video & Audio Controls
+- Real-time Chat during Meetings
+- Participants Panel
+- Draggable & Resizable Chat Sidebar
+- Profile Images and Group Data Simulation
+- Clean UI with Tailwind CSS
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📦 Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- [React](https://reactjs.org/) (with Hooks)
+- [Vite](https://vitejs.dev/) for fast development
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Lucide React Icons](https://lucide.dev/)
+- TypeScript Support
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## 🛠️ Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/teams-clone.git
+cd teams-clone
+
+# Install dependencies
+npm install
+
+# Run the development server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+App will be running on `http://localhost:5173`
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 📂 Project Structure
+
 ```
+src/
+├── assets/           # Images & static assets
+├── components/       # Reusable UI components
+│   ├── call/         # Call/Meeting related components
+│   ├── chat/         # Chat components
+├── const/            # Static Group/Message data
+├── types/            # TypeScript types
+├── App.tsx           # Main App component
+├── main.tsx          # Vite entry point
+```
+
+---
+
+## 📸 Screenshots
+
+- ✅ Chat List & Resizable Sidebar
+- ✅ Meeting Interface with Timer, Video & Mic Control
+- ✅ In-Call Chat & Participants Panel
+
+_(Add screenshots here if needed)_
+
+---
+
+## 🔧 Customization
+
+- Update `groupData` in `src/const/chat.ts` to modify groups & messages.
+- Replace profile images from `/images` folder.
+
+---
+
+## ✨ Future Improvements
+
+- WebSocket/Socket.io for real-time messaging
+- Authentication & User Profiles
+- Video Conference with Multiple Participants
+- File Uploads & Sharing
+
+---
