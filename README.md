@@ -76,12 +76,3 @@ _(Add screenshots here if needed)_
 - Replace profile images from `/images` folder.
 
 ---
-
-## ✨ Future Improvements
-
-- WebSocket/Socket.io for real-time messaging
-- Authentication & User Profiles
-- Video Conference with Multiple Participants
-- File Uploads & Sharing
-
----
