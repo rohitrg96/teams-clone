@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { CalendarBody } from '../components/calendar/CalendarBody'; // adjust path
+import { CalendarBody } from '../components/calendar/CalendarBody';
 import { describe, it, expect, vi } from 'vitest';
 
 const visibleDate = new Date('2025-07-10T00:00:00');

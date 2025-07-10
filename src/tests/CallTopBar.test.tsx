@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { CallTopBar } from '../components/call/CallTopBar'; // adjust path
+import { CallTopBar } from '../components/call/CallTopBar';
 import { describe, it, expect, vi } from 'vitest';
 
 describe('CallTopBar', () => {
