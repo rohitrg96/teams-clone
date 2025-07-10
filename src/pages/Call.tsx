@@ -3,6 +3,7 @@ import type { CallPageProps } from '../types/call.types';
 import { MeetingChat } from '../components/chat/MeetingChat';
 import { ParticipantsPanel } from '../components/chat/ParticipantsPanel';
 import { useCallPage } from '../hooks/useCallPage';
+import { CircularName } from '../components/chat/CircularName';
 
 export const CallPage = ({ onSelectPage, id, isMeet, setIsMeet }: CallPageProps) => {
   const {
@@ -49,11 +50,7 @@ export const CallPage = ({ onSelectPage, id, isMeet, setIsMeet }: CallPageProps)
             />
           ) : (
             <div className="flex flex-col h-full items-center justify-center">
-              <img
-                src={userImage}
-                alt="Profile"
-                className="w-24 h-24 rounded-full mb-4 object-cover border-4 border-white"
-              />
+              <CircularName dimension={12} grpName={userName} image={userImage} />
               <p className="text-black text-xl font-bold">{userName}</p>
             </div>
           )}
