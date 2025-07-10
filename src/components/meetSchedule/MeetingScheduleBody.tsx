@@ -11,12 +11,7 @@ import {
 import { useState } from 'react';
 import { Switch } from '@headlessui/react';
 import { RichTextArea } from './RichTextArea';
-
-interface MeetingScheduleBodyProps {
-  prefillDate?: string;
-  prefillStartTime?: string;
-  prefillEndTime?: string;
-}
+import type { MeetingScheduleBodyProps } from '../../types/meet.types';
 
 export const MeetingScheduleBody = ({
   prefillDate,

@@ -26,8 +26,10 @@ const Topbar = ({ onToggleSidebar }: { onToggleSidebar: () => void }) => {
         </div>
 
         <img
-          src="/images/RohitProfile.jpg" // Update path if needed
-          alt="Profile"
+          src="/images/RohitProfile.jpg"
+          alt="Profile picture of Rohit"
+          width={36}
+          height={36}
           className="w-9 h-9 rounded-full object-cover border border-gray-300"
         />
       </div>

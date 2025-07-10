@@ -1,16 +1,8 @@
 import type { CalendarBodyProps } from '../../types/calendar.types';
+import { weekdaysFull } from '../../const/calendar';
+
 export const CalendarBody = ({ view, visibleDate, onSlotClick }: CalendarBodyProps) => {
   const hours = Array.from({ length: 24 }, (_, i) => `${i}`);
-
-  const weekdaysFull = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday',
-  ];
 
   const isToday = (date: Date) => {
     const today = new Date();

@@ -1,12 +1,6 @@
 import { ChevronLeft, ChevronRight, ChevronDown, CalendarArrowUp } from 'lucide-react';
 import { useState } from 'react';
-
-interface CalendarHeaderBarProps {
-  currentView: 'Day' | 'Work Week' | 'Week';
-  setView: (view: 'Day' | 'Work Week' | 'Week') => void;
-  visibleDate: Date;
-  setVisibleDate: (date: Date) => void;
-}
+import type { CalendarHeaderBarProps } from '../../types/calendar.types';
 
 export const CalendarHeaderBar = ({
   currentView,

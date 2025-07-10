@@ -1,10 +1,7 @@
 import { useState, useEffect } from 'react';
 import type { Message } from '../../types/chat.type';
 import { ChatInput } from './ChatInput';
-
-interface ChatViewProps {
-  messages: Message[];
-}
+import type { ChatViewProps } from '../../types/chat.type';
 
 export const ChatView = ({ messages }: ChatViewProps) => {
   const [input, setInput] = useState('');

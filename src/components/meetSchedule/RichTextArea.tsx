@@ -15,12 +15,7 @@ import {
   PaintBucket,
 } from 'lucide-react';
 import { useState } from 'react';
-
-interface RichTextAreaProps {
-  value: string;
-  onChange: (val: string) => void;
-  placeholder?: string;
-}
+import type { RichTextAreaProps } from '../../types/meet.types';
 
 export const RichTextArea = ({ value, onChange, placeholder }: RichTextAreaProps) => {
   const [isBold, setIsBold] = useState(false);

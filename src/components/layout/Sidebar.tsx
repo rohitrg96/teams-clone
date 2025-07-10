@@ -2,6 +2,14 @@ import { MessageCircle, Users, Calendar, Bell, Video } from 'lucide-react';
 import SidebarItem from '../sideBar/SidebarItem';
 import type { SidebarProps } from '../../types/sideBar.type';
 
+const sidebarItems = [
+  { icon: <MessageCircle size={24} />, label: 'Chat' },
+  { icon: <Video size={24} />, label: 'Meet' },
+  { icon: <Users size={24} />, label: 'Community' },
+  { icon: <Calendar size={24} />, label: 'Calendar' },
+  { icon: <Bell size={24} />, label: 'Activity' },
+];
+
 const Sidebar = ({ isMobile, onSelectPage }: SidebarProps) => {
   return (
     <div
@@ -14,27 +22,14 @@ const Sidebar = ({ isMobile, onSelectPage }: SidebarProps) => {
         <img src="/images/logo.png" alt="Teams" className="w-12 h-12 object-contain" />
       </div>
 
-      <SidebarItem
-        icon={<MessageCircle size={24} />}
-        label="Chat"
-        onClick={() => onSelectPage('Chat')}
-      />
-      <SidebarItem icon={<Video size={24} />} label="Meet" onClick={() => onSelectPage('Meet')} />
-      <SidebarItem
-        icon={<Users size={24} />}
-        label="Community"
-        onClick={() => onSelectPage('Community')}
-      />
-      <SidebarItem
-        icon={<Calendar size={24} />}
-        label="Calendar"
-        onClick={() => onSelectPage('Calendar')}
-      />
-      <SidebarItem
-        icon={<Bell size={24} />}
-        label="Activity"
-        onClick={() => onSelectPage('Activity')}
-      />
+      {sidebarItems.map((item) => (
+        <SidebarItem
+          key={item.label}
+          icon={item.icon}
+          label={item.label}
+          onClick={() => onSelectPage(item.label)}
+        />
+      ))}
     </div>
   );
 };
