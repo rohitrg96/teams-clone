@@ -13,7 +13,7 @@ export const useCallPage = (id: number | undefined, isMeet: boolean) => {
   const audioStreamRef = useRef<MediaStream | null>(null);
 
   const user = groupData.find((group) => group.id === id);
-  const userName = isMeet ? 'Invite people to join you' : user?.grpName;
+  const userName = isMeet ? 'Invite people to join you' : (user?.grpName ?? '');
   const userImage = isMeet ? '/images/RohitProfile.jpg' : user?.image;
 
   useEffect(() => {
