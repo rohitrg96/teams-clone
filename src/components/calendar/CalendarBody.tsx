@@ -111,7 +111,7 @@ export const CalendarBody = ({ view, visibleDate, onSlotClick }: CalendarBodyPro
 
   return (
     <div className="overflow-y-auto ">
-      <div className="flex h-[400px]">
+      <div className="flex h-[485px]">
         {/* Time Column */}
         <div className="w-16 border-r border-gray-300">
           <div className="h-12"></div>
