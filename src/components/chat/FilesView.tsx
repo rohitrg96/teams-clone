@@ -1,30 +1,8 @@
 import { FileText, ArrowUpToLine } from 'lucide-react';
-import { useState } from 'react';
+import { useFileUpload } from '../../hooks/useFileUpload';
 
 export const FilesView = () => {
-  const [files, setFiles] = useState([
-    { name: 'Report.pdf', date: '2024-07-03', sentBy: 'John Doe' },
-    { name: 'Invoice.pdf', date: '2024-06-28', sentBy: 'Alice Smith' },
-    { name: 'Presentation.pdf', date: '2024-06-20', sentBy: 'Michael Brown' },
-  ]);
-
-  const handleUploadClick = () => {
-    document.getElementById('fileInput')?.click();
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const uploadedFile = e.target.files[0];
-
-      const newFile = {
-        name: uploadedFile.name,
-        date: new Date().toISOString().split('T')[0],
-        sentBy: 'You',
-      };
-
-      setFiles((prev) => [newFile, ...prev]);
-    }
-  };
+  const { files, handleUploadClick, handleFileChange } = useFileUpload();
 
   return (
     <div className="flex flex-col flex-1 p-4 sm:p-8 md:p-10 overflow-y-auto w-full max-w-5xl mx-auto">

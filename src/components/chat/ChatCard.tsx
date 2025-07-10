@@ -1,8 +1,8 @@
-import { useState, useRef, useEffect } from 'react';
 import { MoreHorizontal } from 'lucide-react';
 import { CircularName } from './CircularName';
 import type { ChatCardProps } from '../../types/chat.type';
 import { dropdownOptions } from '../../const/chat';
+import { useChatCard } from '../../hooks/useChatCardDropdown';
 
 export const ChatCard = ({
   grpName,
@@ -13,39 +13,8 @@ export const ChatCard = ({
   dateTime,
   isActive,
 }: ChatCardProps) => {
-  const [hover, setHover] = useState(false);
-  const [showDropdown, setShowDropdown] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  const getTimeOrDate = () => {
-    const now = new Date();
-    const msgDate = new Date(dateTime);
-    const isToday = now.toDateString() === msgDate.toDateString();
-
-    if (isToday) {
-      const hours = msgDate.getHours() % 12 || 12;
-      const minutes = msgDate.getMinutes().toString().padStart(2, '0');
-      const ampm = msgDate.getHours() >= 12 ? 'PM' : 'AM';
-      return `${hours}:${minutes} ${ampm}`;
-    } else {
-      const day = msgDate.getDate().toString().padStart(2, '0');
-      const month = (msgDate.getMonth() + 1).toString().padStart(2, '0');
-      return `${day}-${month}`;
-    }
-  };
-
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setShowDropdown(false);
-      }
-    };
-    if (showDropdown) {
-      window.addEventListener('click', handleClickOutside);
-    }
-    return () => window.removeEventListener('click', handleClickOutside);
-  }, [showDropdown]);
+  const { hover, setHover, showDropdown, setShowDropdown, dropdownRef, getTimeOrDate } =
+    useChatCard(dateTime);
 
   return (
     <div
@@ -54,14 +23,27 @@ export const ChatCard = ({
       }`}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
+      data-testid="chat-card"
     >
-      <div className="flex items-center" onClick={() => onClickChatCard(chatId)}>
+      <div
+        className="flex items-center"
+        onClick={() => onClickChatCard(chatId)}
+        data-testid="chat-card-click"
+      >
         <CircularName dimension={10} grpName={grpName} image={image} />
         <div className="px-2 flex flex-col justify-center overflow-y-auto">
-          <div className="font-medium text-sm truncate max-w-[150px] sm:max-w-[200px]">
+          <div
+            className="font-medium text-sm truncate max-w-[150px] sm:max-w-[200px]"
+            data-testid="chat-card-group"
+          >
             {grpName}
           </div>
-          <div className="text-sm text-gray-500 truncate max-w-[150px] sm:max-w-[200px]">{msg}</div>
+          <div
+            className="text-sm text-gray-500 truncate max-w-[150px] sm:max-w-[200px]"
+            data-testid="chat-card-msg"
+          >
+            {msg}
+          </div>
         </div>
       </div>
 
@@ -74,16 +56,21 @@ export const ChatCard = ({
               e.stopPropagation();
               setShowDropdown((prev) => !prev);
             }}
+            data-testid="chat-card-more"
           >
             <MoreHorizontal size={16} />
           </div>
         ) : (
-          <div className="text-gray-500 text-xs">{getTimeOrDate()}</div>
+          <div className="text-gray-500 text-xs" data-testid="chat-card-time">
+            {getTimeOrDate()}
+          </div>
         )}
 
-        {/* Dropdown */}
         {showDropdown && (
-          <div className="absolute top-6 right-0 bg-white shadow-lg z-50 w-45 p-2">
+          <div
+            className="absolute top-6 right-0 bg-white shadow-lg z-50 w-45 p-2"
+            data-testid="chat-card-dropdown"
+          >
             {dropdownOptions.map((option, idx) => (
               <div
                 key={idx}

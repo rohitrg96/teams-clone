@@ -1,67 +1,24 @@
-import React, { useState, useRef, useEffect } from 'react';
 import { ChatCard } from '../components/chat/ChatCard';
 import { groupData } from '../const/chat';
 import { ChatBox } from '../components/chat/ChatBox';
 import { Filter, Video, Plus, ArrowLeft } from 'lucide-react';
 import type { ChatPageProps } from '../types/chat.type';
+import { useChatPage } from '../hooks/useChatPage';
 
 export const Chat = ({ onSelectPage, id, setId, setIsMeet }: ChatPageProps) => {
-  const [chatListWidth, setChatListWidth] = useState(400);
-  const [showChatBoxMobile, setShowChatBoxMobile] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 768);
-
-  const containerRef = useRef<HTMLDivElement>(null);
-  const isDraggingRef = useRef(false);
-
-  const MIN_WIDTH = 280;
-  const MAX_WIDTH_FACTOR = 0.5;
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    e.preventDefault();
-    isDraggingRef.current = true;
-    document.body.style.cursor = 'col-resize';
-  };
-
-  const handleMouseMove = (e: MouseEvent) => {
-    if (!isDraggingRef.current || !containerRef.current) return;
-
-    const containerRect = containerRef.current.getBoundingClientRect();
-    const containerWidth = containerRect.width;
-    const newWidth = e.clientX - containerRect.left;
-
-    if (newWidth < MIN_WIDTH) {
-      setChatListWidth(0);
-    } else if (newWidth <= containerWidth * MAX_WIDTH_FACTOR) {
-      setChatListWidth(newWidth);
-    } else {
-      setChatListWidth(containerWidth * MAX_WIDTH_FACTOR);
-    }
-  };
-
-  const handleMouseUp = () => {
-    isDraggingRef.current = false;
-    document.body.style.cursor = 'default';
-  };
+  const {
+    chatListWidth,
+    showChatBoxMobile,
+    setShowChatBoxMobile,
+    isDesktop,
+    containerRef,
+    handleMouseDown,
+  } = useChatPage();
 
   const handleChatSelect = (chatId: number) => {
     setId(chatId);
     setShowChatBoxMobile(true);
   };
-
-  useEffect(() => {
-    window.addEventListener('resize', () => {
-      setIsDesktop(window.innerWidth >= 768);
-    });
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseup', handleMouseUp);
-    return () => {
-      window.removeEventListener('resize', () => {
-        setIsDesktop(window.innerWidth >= 768);
-      });
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
-    };
-  }, []);
 
   return (
     <div ref={containerRef} className="flex h-screen w-full relative">
@@ -108,7 +65,7 @@ export const Chat = ({ onSelectPage, id, setId, setIsMeet }: ChatPageProps) => {
                   msg={lastMsg}
                   chatId={group.id}
                   image={group.image}
-                  dateTime={group.dateTime}
+                  dateTime={group.dateTime.toISOString()}
                   isActive={group.id === id}
                   onClickChatCard={handleChatSelect}
                 />

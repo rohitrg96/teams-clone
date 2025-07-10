@@ -6,7 +6,7 @@ export interface ChatCardProps {
   onClickChatCard: (id: number) => void;
   chatId: number;
   image?: string;
-  dateTime: Date;
+  dateTime: string;
   isActive: boolean;
 }
 
@@ -51,4 +51,21 @@ export interface ChatHeaderProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
   onSelectPage: (page: string) => void;
+}
+export interface ChatInputProps {
+  input: string;
+  setInput: (value: string) => void;
+  onSend: () => void;
+  pt?: string;
+  pb?: string;
+}
+
+export interface ChatViewProps {
+  messages: Message[];
+}
+
+export interface UploadedFile {
+  name: string;
+  date: string;
+  sentBy: string;
 }

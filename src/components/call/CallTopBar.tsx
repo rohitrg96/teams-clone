@@ -49,11 +49,13 @@ export const CallTopBar = ({
       <div className="flex items-center space-x-6 relative overflow-x-hidden">
         <div className="hidden sm:flex items-center space-x-6">
           <MessageSquareMore
+            data-testid="chat-icon"
             size={22}
             className="cursor-pointer hover:text-purple-500"
             onClick={onToggleChat}
           />
           <UserPlus
+            data-testid="participants-icon"
             size={22}
             className="cursor-pointer hover:text-purple-700"
             onClick={onToggleParticipants}
@@ -71,12 +73,14 @@ export const CallTopBar = ({
           <div className="h-6 w-6 flex items-center justify-center">
             {videoEnabled ? (
               <Video
+                data-testid="video-icon"
                 size={22}
                 className="cursor-pointer hover:text-gray-700 w-full h-full"
                 onClick={onToggleVideo}
               />
             ) : (
               <VideoOff
+                data-testid="videoff-icon"
                 size={22}
                 className="cursor-pointer hover:text-gray-700 w-full h-full"
                 onClick={onToggleVideo}
@@ -87,6 +91,7 @@ export const CallTopBar = ({
           <div className="h-6 w-6 flex items-center justify-center">
             {micEnabled ? (
               <Mic
+                data-testid="mic-icon"
                 size={22}
                 className="cursor-pointer hover:text-gray-700 w-full h-full"
                 onClick={onToggleMic}

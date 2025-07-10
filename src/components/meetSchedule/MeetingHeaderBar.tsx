@@ -1,9 +1,5 @@
 import { Calendar } from 'lucide-react';
-
-interface MeetingHeaderBarProps {
-  onSave: () => void;
-  onClose: () => void;
-}
+import type { MeetingHeaderBarProps } from '../../types/meet.types';
 
 export const MeetingHeaderBar = ({ onSave, onClose }: MeetingHeaderBarProps) => {
   return (

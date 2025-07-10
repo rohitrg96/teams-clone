@@ -8,7 +8,6 @@ interface ParticipantsPanelProps {
 export const ParticipantsPanel = ({ micEnabled, onClose }: ParticipantsPanelProps) => {
   return (
     <div className="h-full w-4/12 bg-white text-black flex flex-col border-l border-gray-300">
-      
       {/* Top Bar */}
       <div className="px-4 py-3 border-b border-gray-300 font-bold text-lg flex justify-between items-center">
         <div>Participants</div>
@@ -19,7 +18,6 @@ export const ParticipantsPanel = ({ micEnabled, onClose }: ParticipantsPanelProp
 
       {/* Body */}
       <div className="px-4 py-3 space-y-4">
-
         {/* In This Meeting Header */}
         <div className="flex items-center space-x-2 text-sm text-gray-700 font-medium">
           <ChevronDown size={16} />
@@ -28,7 +26,6 @@ export const ParticipantsPanel = ({ micEnabled, onClose }: ParticipantsPanelProp
 
         {/* Participant Card */}
         <div className="flex items-center justify-between">
-          
           <div className="flex items-center space-x-3">
             <img
               src="/images/RohitProfile.jpg"

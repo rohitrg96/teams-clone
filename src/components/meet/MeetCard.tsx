@@ -1,12 +1,4 @@
-interface MeetCardProps {
-  label: string;
-  icon: React.ReactNode;
-  bgColor: string;
-  textColor: string;
-  hoverEffect?: string | boolean;
-  onClick?: () => void;
-}
-
+import type { MeetCardProps } from '../../types/meet.types';
 const MeetCard = ({ label, icon, bgColor, textColor, hoverEffect, onClick }: MeetCardProps) => {
   return (
     <div

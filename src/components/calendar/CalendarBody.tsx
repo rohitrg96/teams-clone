@@ -1,21 +1,8 @@
-interface CalendarBodyProps {
-  view: 'Day' | 'Work Week' | 'Week';
-  visibleDate: Date;
-  onSlotClick?: (date: Date, hour: number, isSecondHalf: boolean) => void;
-}
+import type { CalendarBodyProps } from '../../types/calendar.types';
+import { weekdaysFull } from '../../const/calendar';
 
 export const CalendarBody = ({ view, visibleDate, onSlotClick }: CalendarBodyProps) => {
   const hours = Array.from({ length: 24 }, (_, i) => `${i}`);
-
-  const weekdaysFull = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday',
-  ];
 
   const isToday = (date: Date) => {
     const today = new Date();
@@ -72,13 +59,17 @@ export const CalendarBody = ({ view, visibleDate, onSlotClick }: CalendarBodyPro
           {hours.map((hr) => (
             <div key={hr}>
               <div
-                className="h-12 relative border-b border-gray-200 text-xs px-2 hover:bg-gray-100 cursor-pointer"
+                role="button"
+                aria-label={`Hour ${hr} First Half`}
                 onClick={() => onSlotClick?.(visibleDate, Number(hr), false)}
-              ></div>
-              <div
                 className="h-12 relative border-b border-gray-200 text-xs px-2 hover:bg-gray-100 cursor-pointer"
+              />
+              <div
+                role="button"
+                aria-label={`Hour ${hr} Second Half`}
                 onClick={() => onSlotClick?.(visibleDate, Number(hr), true)}
-              ></div>
+                className="h-12 relative border-b border-gray-200 text-xs px-2 hover:bg-gray-100 cursor-pointer"
+              />
             </div>
           ))}
         </div>
@@ -120,7 +111,7 @@ export const CalendarBody = ({ view, visibleDate, onSlotClick }: CalendarBodyPro
 
   return (
     <div className="overflow-y-auto ">
-      <div className="flex h-[400px]">
+      <div className="flex h-[485px]">
         {/* Time Column */}
         <div className="w-16 border-r border-gray-300">
           <div className="h-12"></div>

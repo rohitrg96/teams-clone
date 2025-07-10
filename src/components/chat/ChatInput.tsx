@@ -1,13 +1,6 @@
 import { useRef } from 'react';
 import { Smile, Paperclip, Send } from 'lucide-react';
-
-interface ChatInputProps {
-  input: string;
-  setInput: (value: string) => void;
-  onSend: () => void;
-  pt?: string;
-  pb?: string;
-}
+import type { ChatInputProps } from '../../types/chat.type';
 
 export const ChatInput = ({
   input,
