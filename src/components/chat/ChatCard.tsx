@@ -34,7 +34,6 @@ export const ChatCard = ({
     }
   };
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
@@ -54,14 +53,27 @@ export const ChatCard = ({
       }`}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
+      data-testid="chat-card"
     >
-      <div className="flex items-center" onClick={() => onClickChatCard(chatId)}>
+      <div
+        className="flex items-center"
+        onClick={() => onClickChatCard(chatId)}
+        data-testid="chat-card-click"
+      >
         <CircularName dimension={10} grpName={grpName} image={image} />
         <div className="px-2 flex flex-col justify-center overflow-y-auto">
-          <div className="font-medium text-sm truncate max-w-[150px] sm:max-w-[200px]">
+          <div
+            className="font-medium text-sm truncate max-w-[150px] sm:max-w-[200px]"
+            data-testid="chat-card-group"
+          >
             {grpName}
           </div>
-          <div className="text-sm text-gray-500 truncate max-w-[150px] sm:max-w-[200px]">{msg}</div>
+          <div
+            className="text-sm text-gray-500 truncate max-w-[150px] sm:max-w-[200px]"
+            data-testid="chat-card-msg"
+          >
+            {msg}
+          </div>
         </div>
       </div>
 
@@ -74,16 +86,21 @@ export const ChatCard = ({
               e.stopPropagation();
               setShowDropdown((prev) => !prev);
             }}
+            data-testid="chat-card-more"
           >
             <MoreHorizontal size={16} />
           </div>
         ) : (
-          <div className="text-gray-500 text-xs">{getTimeOrDate()}</div>
+          <div className="text-gray-500 text-xs" data-testid="chat-card-time">
+            {getTimeOrDate()}
+          </div>
         )}
 
-        {/* Dropdown */}
         {showDropdown && (
-          <div className="absolute top-6 right-0 bg-white shadow-lg z-50 w-45 p-2">
+          <div
+            className="absolute top-6 right-0 bg-white shadow-lg z-50 w-45 p-2"
+            data-testid="chat-card-dropdown"
+          >
             {dropdownOptions.map((option, idx) => (
               <div
                 key={idx}

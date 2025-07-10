@@ -1,9 +1,4 @@
-interface CalendarBodyProps {
-  view: 'Day' | 'Work Week' | 'Week';
-  visibleDate: Date;
-  onSlotClick?: (date: Date, hour: number, isSecondHalf: boolean) => void;
-}
-
+import type { CalendarBodyProps } from '../../types/calendar.types';
 export const CalendarBody = ({ view, visibleDate, onSlotClick }: CalendarBodyProps) => {
   const hours = Array.from({ length: 24 }, (_, i) => `${i}`);
 
@@ -72,13 +67,17 @@ export const CalendarBody = ({ view, visibleDate, onSlotClick }: CalendarBodyPro
           {hours.map((hr) => (
             <div key={hr}>
               <div
-                className="h-12 relative border-b border-gray-200 text-xs px-2 hover:bg-gray-100 cursor-pointer"
+                role="button"
+                aria-label={`Hour ${hr} First Half`}
                 onClick={() => onSlotClick?.(visibleDate, Number(hr), false)}
-              ></div>
-              <div
                 className="h-12 relative border-b border-gray-200 text-xs px-2 hover:bg-gray-100 cursor-pointer"
+              />
+              <div
+                role="button"
+                aria-label={`Hour ${hr} Second Half`}
                 onClick={() => onSlotClick?.(visibleDate, Number(hr), true)}
-              ></div>
+                className="h-12 relative border-b border-gray-200 text-xs px-2 hover:bg-gray-100 cursor-pointer"
+              />
             </div>
           ))}
         </div>
